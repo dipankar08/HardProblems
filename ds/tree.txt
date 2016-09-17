@@ -1,0 +1,214 @@
+
+
+
+// Print Level order simple Top to donw.
+// The idea is use a Queue. First push the root node. Untill the queue is not empty 
+// pop an item from the query, print it and then push left and right node, if exist.
+
+void levelorder1(Node * root) {
+    if(root == NULL) return;
+    queue < Node *> Q = queue < Node *> ();
+    Q.push(root);
+    while(Q.empty() == false) {
+        Node * temp = Q.front();
+        Q.pop();
+        cout << temp->val << " ";
+        if(temp->left != NULL) Q.push(temp->left);
+        if(temp->right != NULL) Q.push(temp->right);
+    }
+}
+
+
+// Print Level order simple Top to donw but from right to left
+// same idea as before, we just need to push the right node first and then left node.
+// Reverse level order top to down 1 3 2 7 6 5 4
+// Let's draw and see how it works.
+void levelorder2(Node * root) {
+    if(root == NULL) return;
+    queue < Node *> Q = queue < Node *> ();
+    Q.push(root);
+    while(Q.empty() == false) {
+        Node * temp = Q.front();
+        Q.pop();
+        cout << temp->val << " ";
+        if(temp->right != NULL) Q.push(temp->right);
+        if(temp->left != NULL) Q.push(temp->left);
+    }
+}
+
+// Level wise with marker as NULL
+// 1
+// 2 3
+// 4 5 6 7
+// The idea is to use level order travarsal. Just after compltion of each level push a level end marker
+// here it is a NULL pointer. when we get a level end marker from queue, add Next marker to the queue. 
+// Mare sure, you only push a marker iff we have some node else we will fall into infinite loop.
+void levelorder_by_level_wize(Node * root) {
+    if(root == NULL) return;
+    queue < Node *> Q = queue < Node *> ();
+    Q.push(root);
+    Q.push(NULL); //null is a marker
+    while(Q.empty() == false) {
+        Node * temp = Q.front();
+        Q.pop();
+        if(temp == NULL) {
+            cout << endl;
+            if( ! Q.empty()) {
+                Q.push(NULL);
+            }
+            continue;
+        }
+        cout << temp->val << " ";
+        if(temp->left != NULL) Q.push(temp->left);
+        if(temp->right != NULL) Q.push(temp->right);
+    }
+}
+
+// Level wise with out marker
+// 1
+// 2 3
+// 4 5 6 7
+// Similar problem as before but here I dont want to use any marker. Then how we keep track, the level got complted?
+// Using Queue size. Note that we have a loop inside the while, which process all nodes in the level and populate the
+// queue with next levle node. Interesting na?
+void levelorder_by_level_without_marker(Node * root) {
+    if(root == NULL) return;
+    queue < Node *> Q = queue < Node *> ();
+    Q.push(root);
+    while(Q.empty() == false) {
+        int prev_level_count = Q.size();
+        for(int i = 0; i < prev_level_count; i++) {
+            Node * temp = Q.front();
+            Q.pop();
+            cout << temp->val << " ";
+            if(temp->left != NULL) Q.push(temp->left);
+            if(temp->right != NULL) Q.push(temp->right);
+        }
+        cout << endl;
+    }
+}
+
+// Single Queue and Flag = 1 2 3 5 4 7 6
+void levelorder5(Node * root) {
+    if(root == NULL) return;
+    queue < Node *> Q = queue < Node *> ();
+    Q.push(root);
+    bool L2R = true;
+    while(Q.empty() == false) {
+        int prev_level_count = Q.size();
+        for(int i = 0; i < prev_level_count; i++) {
+            Node * temp = Q.front();
+            Q.pop();
+            cout << temp->val << " ";
+            if(L2R == true) {
+                if(temp->left != NULL) Q.push(temp->left);
+                if(temp->right != NULL) Q.push(temp->right);
+            } else {
+                if(temp->right != NULL) Q.push(temp->right);
+                if(temp->left != NULL) Q.push(temp->left);
+            }
+        }
+        L2R = ! L2R;
+    }
+}
+
+// Print spricially Two Stack approach :1 3 2 4 5 6 7
+// Infact level wize travasla can be done by two stack. Here the idea is to use stack to maintain zig zag, How ?
+// We have two stack, push the root in one stack. the unce that stack is empty , pop it and push all child node in other stack,
+// at end exhange the stack. We also have a boolean flag to revere the order of exploring left and right node. 
+// Two things: Two stack and swap process + reversing the exploration of child using a flag.
+void print_tree_top_down_zigzag(Node * root) {
+    if(root == NULL) return;
+    stack < Node *> * S1 = new stack < Node *> ();
+    stack < Node *> * S2 = new stack < Node *> ();
+    S1->push(root);
+    bool L2R = true;
+    while(S1 ->empty() == false) {
+        while( ! S1->empty()) {
+            Node * temp = S1->top();
+            S1->pop();
+            cout << temp->val << " ";
+            if(L2R) {
+                if(temp->left != NULL) S2->push(temp->left);
+                if(temp->right != NULL) S2->push(temp->right);
+            } else {
+                if(temp->right != NULL) S2->push(temp->right);
+                if(temp->left != NULL) S2->push(temp->left);
+            }
+        }
+        //swap stack
+        stack < Node *> * temp1;
+        temp1 = S1;
+        S1 = S2;
+        S2 = temp1;
+        L2R = ! L2R;
+    }
+}
+
+// Lever oder from Buttom: 4 5 6 7 2 3 1
+// Idea is to use a stack holding the data while levle wise priting when the levlewise travarsal complted, we print the stack,
+// to print it in proper orderm, we explore it in revser direction, right then left..
+void level_order_buttom_top(Node * root) {
+    if(root == NULL) {
+        return;
+    }
+    queue < Node *> Q = queue < Node *> ();
+    stack < Node *> S = stack < Node *> ();
+    Q.push(root);
+    while( ! Q.empty()) {
+        Node * temp = Q.front();
+        Q.pop();
+        if(temp->right != NULL) Q.push(temp->right);
+        if(temp->left != NULL) Q.push(temp->left);
+        S.push(temp);
+    }
+    while( ! S.empty()) {
+        cout << S.top()->val << " ";
+        S.pop();
+    }
+}
+
+// The idea is similar as we calculate vertical sum. We have a map to contains diameter offset from root. As we go ahead with
+// recursion, we pass the offset by +,- 1. also we just keep the first node for that offset ( that's hsown from Top) else
+// Ignore. at last we are priting the map. Do you notice, I used an order map ( whcih is implemeneted by BST in STL )
+
+void showTopViewUtils(Node * r,  int offset,  map < int,  int > * m) {
+    if(r == NULL) return;
+    //is that key exist if not just add the fiest view. 
+    if(m->find(offset) == m->end()) {
+        m->insert(pair<int,int>(offset,  r->val) );
+    }
+    if(r->left != NULL)showTopViewUtils(r ->left,  offset - 1,  m);
+    if(r->right != NULL)showTopViewUtils(r ->right,  offset + 1,  m);
+}
+
+void showTopView(Node * root) {
+    map < int,  int > * m = new map < int,  int > ();
+    showTopViewUtils(root,0,m);
+    for( pair<int,int> x: *m){
+        cout<< x.second<<" ";
+    }
+}
+
+// Buttom View 4 2 6 3 7
+// The idea is similar to top view. here we keep oevrrideing the exiting offsetnode as we explore more deeper - as we want to have 
+// Buttom view.
+void showButtomViewUtils(Node * r,  int offset,  map < int,  int > * m) {
+    if(r == NULL) return;
+    std::map<int, int>::iterator it = m->find(offset); 
+    if (it != m->end()){
+           it->second = r->val;
+    } else{
+        m->insert(pair<int,int>(offset,  r->val) );
+    }
+    if(r->left != NULL)showButtomViewUtils(r ->left,  offset - 1,  m);
+    if(r->right != NULL)showButtomViewUtils(r ->right,  offset + 1,  m);
+}
+
+void showButtomView(Node * root) {
+    map < int,  int > * m = new map < int,  int > ();
+    showButtomViewUtils(root,0,m);
+    for( pair<int,int> x: *m){
+        cout<< x.second<<" ";
+    }
+}

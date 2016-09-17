@@ -1,0 +1,61 @@
+######################################################################################
+ Please list your problem Here 
+######################################################################################
+
+Window Scan technique
+----------------------
+1. find minmum window to cover all strings.
+
+
+
+//The idea is to have a frequnecy map for string t and scan string s from lefte to right
+// we have two pointer left and right, we are moving right unless all char of t geot covered.
+//then we move left to srink the windows by skipping all useless and extra char required to cover t
+string findMinWindowsCoversAllElement(string s,  string t){
+    char toBeFound[256] = {0};
+    char hasFound[256] = {0};
+    for( int i = 0; i < t.size(); i++) {
+        toBeFound[t[i]]++;
+    }
+    int hasFoundCount = 0;
+    int left = 0,  right = 0,  min_length_so_far = INT_MAX;
+    string result="";
+    
+    while(right < s.size()){
+        //expand right unless we found all the element
+        for(;hasFoundCount < t.size() && right < s.size();right++ ){
+            if(toBeFound[s[right]] > 0){ //usefull.
+                if( hasFound[s[right]] < toBeFound[s[right]]) hasFoundCount++;
+                hasFound[s[right]] ++;
+            }
+        }
+        // At this point, we found all elemnet so try to sync.
+        if(hasFoundCount == t.size()){ 
+            while(left < right){
+                if(toBeFound[s[left]] == 0 ){ // useless symbol.
+                    left++;
+                    continue;
+                }
+                if(hasFound[s[left]] > toBeFound[s[left]]){ // extra char
+                    left++;
+                    continue;
+                }
+                if(hasFound[s[left]] == toBeFound[s[left]]){ // we found a mast have char so we cant srink more
+                    //update output
+                    if( right - left < min_length_so_far ){
+                        min_length_so_far = right - left;
+                        result = s.substr(left,min_length_so_far); 
+                    }
+                    
+                    //Now proceed more
+                    hasFound[s[left]]--;
+                    hasFoundCount --;
+                    left++;
+                    break;
+                }
+            }
+        }
+        
+    }
+    return result;
+}

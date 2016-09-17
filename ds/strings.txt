@@ -8,6 +8,24 @@ Window Scan technique
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //The idea is to have a frequnecy map for string t and scan string s from lefte to right
 // we have two pointer left and right, we are moving right unless all char of t geot covered.
 //then we move left to srink the windows by skipping all useless and extra char required to cover t

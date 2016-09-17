@@ -1,3 +1,16 @@
+==============================================================================
+Problems on Tree
+==============================================================================
+
+Tree priting problem
+-------------------------
+1. Level order priting
+2. level order priting each line contains each level( With and without markers)
+3. Print the tree spiral oder from top to buttom
+4. print the tree from buttom to top.
+5. print top view of the tree
+6. print buttom view of the tree
+
 
 
 

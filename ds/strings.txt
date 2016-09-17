@@ -9,6 +9,14 @@ Window Scan technique
 
 
 
+String Encode Decode problems
+-----------------------------
+1. Encode strings like wwwwaaadexxxxxx => w4a3d1e1x6
+2. Decode strings like w4a3d1e1x6 => wwwwaaadexxxxxx
+
+
+
+
 
 
 
@@ -76,4 +84,92 @@ string findMinWindowsCoversAllElement(string s,  string t){
         
     }
     return result;
+}
+
+
+void reverse(char * a,  int l,  int r) {
+    while(l < r) {
+        char t = a[l];
+        a[l] = a[r];
+        a[r] = t;
+        l++;
+        r--;
+    }
+}
+
+//Exampel 1: wwwwaaadexxxxxx => w4a3d1e1x6
+char * encodestring( char * a) {
+    int in_idx = 0;
+    int out_idx = 0;
+    //scan from left to right
+    char cur = a[in_idx++];
+    int count = 1;
+    while( a[in_idx] != '\0') {
+        if(cur == a[in_idx]) {
+            count++;
+            in_idx++;
+        } else {
+            a[out_idx++] = cur;
+            int start = out_idx;
+            while(count > 0) {
+                a[out_idx++] = count%10 + '0';
+                count = count / 10;
+            }
+            reverse(a,  start,  out_idx - 1);
+            cur = a[in_idx];
+            count = 1;
+            in_idx++;
+        }
+    }
+    //We might have somthing left
+    a[out_idx++] = cur;
+    int start = out_idx;
+    while(count > 0) {
+        a[out_idx++] = count%10 + '0';
+        count = count / 10;
+    }
+    reverse(a,  start,  out_idx - 1);
+    a[out_idx++] = '\0';
+    return a;
+}
+
+//Exampel 2: wwwwaaadexxxxxx <= w4a3d1e1x6
+char * decode(char * a) {
+    //find out the length
+    int len = 0;
+    int cur_lenth = 0;
+    for(int i = 0; i < strlen(a); i++) {
+        if(a[i] >= '0' && a[i] <= '9') {
+            cur_lenth = cur_lenth * 10 + a[i] - '0';
+        } else {
+            len = len + cur_lenth;
+            cur_lenth = 0;
+        }
+    }
+    //just need to do it at the end
+    len = len + cur_lenth;
+    //cout << len;
+    char * dest = new char[len + 1];
+    //iterate over again..
+    cur_lenth = 0;
+    char cur_char = a[0];
+    int j = 0;
+    for(int i = 0; i < strlen(a); i++) {
+        if(a[i] >= '0' && a[i] <= '9') {
+            cur_lenth = cur_lenth * 10 + a[i] - '0';
+        } else {
+            while(cur_lenth > 0){
+                dest[j++] = cur_char;
+                cur_lenth--;
+            }
+            cur_lenth = 0;
+            cur_char = a[i];
+        }
+    }
+    while(cur_lenth > 0){
+        dest[j++] = cur_char;
+        cur_lenth--;
+    }
+    dest[j] ='\0';
+    return dest;
 }

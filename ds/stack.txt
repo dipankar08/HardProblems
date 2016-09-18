@@ -1,0 +1,39 @@
+#########################################
+Problem on stack
+#########################################
+
+Problems on parenthesis
+------------------------
+1) Detect Duplicate parenthesis 
+2) Redundant Braces
+3) maximum depth of nested parenthesis in a string
+
+Stack Mathamatics
+-----------------------
+1) Evaluate Expression
+2) Rain Water Trapped
+
+Custom Implementation
+----------------------
+1) Stack in an Array 
+1A) Two Stack in an array
+1B) stack in an array
+2) Implement a stack using single queue
+2A) Implement a stack using Two queue
+3) Reverse an stack inplace
+4) sort a stack
+
+Custom Operation
+-----------------------
+2) Design a stack that supports getMin() in O(1) time 
+2) Design a stack that supports getMin() in O(1) time and O(1) extra space
+3 ) Get Middle in O(1)
+
+
+Hard Problems
+-----------------
+1) Nearest Smaller Element
+2) Sliding Window Max
+3) Largest Rectangle in Histogram
+4) Merge Overlapping Intervals
+5) The Stock Span Problem

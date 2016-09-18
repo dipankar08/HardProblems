@@ -2,6 +2,10 @@
 Problem on stack
 #########################################
 
+IceBreakers
+--------------------------
+1) Simplify unix path.
+
 Problems on parenthesis
 ------------------------
 1) Detect Duplicate parenthesis 
@@ -41,7 +45,38 @@ Hard Problems
 
 codes
 -------------------------------------------------------
-
+// This is very simple example of stack. Just scan though left to right and keep the token string. When you got a /,
+// you might do push, pop or do nothing. At end pop all the elment from Stack and keep prepending to get the result. 
+// Some tricky test is what if (a) the string donet end with / (b) what if your stack and donet contains any thing ex:/.././
+//(c) what if  you have something like /..////../ ?
+string simplifyPath(string str) {
+    //adding / at the end
+    str = str + "/";
+    stack < string > s;
+    string name;
+    for(int i = 1; i < str.size(); i++) {
+        if(str[i] == '/') {
+            if(name.size() == 0) continue;
+            if(name == "..") {
+                if( ! s.empty()) s.pop();
+            } else if(name == "."){
+                //do nothing
+                } else {
+                s.push(name);
+            }
+            name.clear();
+        } else {
+            name.push_back(str[i]);
+        }
+    }
+    string res;
+    while( ! s.empty()) {
+        res.insert(0,  "/" + s.top());//prepend
+        s.pop();
+    }
+    if(res.size() == 0) res.append("/");
+    return res;
+}
 
 
 // The idea is to keep track all the minimum candicate for perticular elemnet while scanning from left to right.

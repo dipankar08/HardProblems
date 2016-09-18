@@ -20,3 +20,41 @@ Custom Operation
 Hard Problems
 -----------------
 1) Sliding Window Max
+// The idea is simple to use a queue. Queue always conatins the valid list of max value in that windows and 
+// max value will be in fornt. We started by processing first k elmnet and build the queue - by poping all the small
+//elemnet and push the current elmnet to store all condidate for that window. 
+// In next (k..n) elemnet we did the same thing also taken care to rmove all the elment from front if they goes out of
+// windows. To achive it we need to store the index rather than storing the actual value.
+vector < int > slidingMaximum(const vector < int > & nums,  int k) {
+    deque < int > iqueue;// we just store the index
+    vector < int > res;
+    //base case
+    if(nums.size() < k || k == 0) return res;
+    //process the first k elemnets
+    for(int i = 0; i < k; i++) {
+        while( ! iqueue.empty() && nums[iqueue.back()] <= nums[i]) {
+            iqueue.pop_back();
+        }
+        iqueue.push_back(i);
+    }
+    //now process all other elments.
+    for(int i = k; i < nums.size(); i++) {
+
+        //Here we collect the restlt for the last iteration. 
+        res.push_back(nums[iqueue.front()]);
+        
+        //Prepare the candidate for next iteartaion.
+        while( ! iqueue.empty() && nums[iqueue.back()] <= nums[i]) {
+            iqueue.pop_back();
+        }
+        iqueue.push_back(i);
+        
+        //check it something expire in front or not
+        while( ! iqueue.empty() && iqueue.front() <= i - k ) {
+            iqueue.pop_front();
+        }
+    }
+    //we left one result
+    res.push_back(nums[iqueue.front()]);
+    return res;
+}

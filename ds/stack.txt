@@ -32,8 +32,108 @@ Custom Operation
 
 Hard Problems
 -----------------
-1) Nearest Smaller Element
-2) Sliding Window Max
-3) Largest Rectangle in Histogram
+1) Nearest Smaller Element [Done]
+3) Largest Rectangle in Histogram[DONE]
 4) Merge Overlapping Intervals
-5) The Stock Span Problem
+5) The Stock Span Problem/Next greater elements [DONE]
+
+
+
+codes
+-------------------------------------------------------
+
+
+
+// The idea is to keep track all the minimum candicate for perticular elemnet while scanning from left to right.
+// We remove all elemment which is higher than the elmemt under process and print the answer and then push that
+// element into the stack as a potential candidate as min for next elment. Here stack allow us to store all potential minimum 
+// in order.
+vector < int > prevSmaller(vector < int > & nums) {
+    stack < int > s;
+    vector < int > res;
+    //base case:
+    if(nums.size() == 0) return res;
+    // The output of first elment is always -1
+    res.push_back( - 1);
+    s.push(nums[0]);
+    for(int i = 1; i < nums.size(); i++) {
+        //find the corerct minimum from the candidate in the stack
+        while( ! s.empty() && s.top() >= nums[i]) {
+            s.pop();
+        }
+        // at this point either stack tp conatins min or empty.
+        if(s.empty()) {
+            res.push_back(-1);
+        } else {
+            res.push_back(s.top());
+        }
+        //Push this elment as minimum candidate for next elemnet
+        s.push(nums[i]);
+    }
+    return res;
+}
+
+// The problem is simlar as other one, we scan the array from right to left
+// and keep track the potential max candidate for that perticular elemnet.
+vector < int > nextGreater(vector < int > & nums) {
+    stack < int > s;
+    vector < int > res;
+    //base case:
+    if(nums.size() == 0) return res;
+    // The output of first elment is always -1
+    res.push_back( - 1);
+    s.push(nums[nums.size()-1]);
+    
+    for(int i = nums.size()-2; i >=0 ; i--) {
+        //find the corerct max from the candidate in the stack
+        while( ! s.empty() && s.top() <= nums[i]) {
+            s.pop();
+        }
+        // at this point either stack tp conatins max or empty.
+        if(s.empty()) {
+            res.push_back(-1);
+        } else {
+            res.push_back(s.top());
+        }
+        //Push this elment as max candidate for next elemnet ( in right to left fasihm)
+        s.push(nums[i]);
+    }
+    //Now Reverse this output 
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+//The idea is to scan the array from left and having a stack to keeptrack all the incrementing height.
+// if cur elment is higher than stack top , just push it, if it is less, pop elemnet one by one and 
+// calculate height of each segment. It's easy to calculate . Try to do it in white board for incrementaing heights.
+int largestRectangleArea(vector<int> &nums) {
+    stack<int> s;
+    int max_so_far = 0;
+    int i ;
+    while(i<nums.size()){
+        //Is the height of this bar is higher than previous on stack
+        if(s.empty() || nums[i] >= nums[s.top()] ){
+            s.push(i++);
+            continue;
+        }
+        //Here the current bar height is -ve, so we can't go farther and we need to pop.
+        while(!s.empty() &&  nums[s.top()] > nums[i]){
+            //See what is the result for this?
+            int height = nums[s.top()];
+            s.pop();
+            int width = s.empty() ? i : (i - s.top())  -1;
+            max_so_far = max(max_so_far, height*width );
+        }
+        //push this just like starting..
+        s.push(i++);
+    }
+    // at this point the stack contins only incremetal heights.
+    // do the same operation by looking backword and calculating the ans.
+    while(!s.empty()){
+            int height = nums[s.top()];
+            s.pop();
+            int width = s.empty()? i: i - s.top()  -1;
+            max_so_far = max(max_so_far, height*width );
+    }
+    return max_so_far;
+}

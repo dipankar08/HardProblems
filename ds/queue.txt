@@ -20,6 +20,9 @@ Custom Operation
 Hard Problems
 -----------------
 1) Sliding Window Max
+
+
+
 // The idea is simple to use a queue. Queue always conatins the valid list of max value in that windows and 
 // max value will be in fornt. We started by processing first k elmnet and build the queue - by poping all the small
 //elemnet and push the current elmnet to store all condidate for that window. 

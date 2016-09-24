@@ -173,3 +173,44 @@ char * decode(char * a) {
     dest[j] ='\0';
     return dest;
 }
+
+
+
+// The idea is to doing it by recursion. The base case when we need one segmnet i.e. k =1, elase just acuurering the sum upto < 255 and 
+// do the recursion for remaining charecter.
+// It can eb also noted that there are two main constrains (1) res < 255 (2) we Can't have leading zeros. 10.01.10.11 is invalid.
+vector < string > FindAllUtils(string s,  int k) {
+    vector < string > out;
+    //base case when we are having one string.
+    if( k == 1) {
+        if(s.empty()) return out;
+        int res = 0;
+        for(int i = 0; i < s.size(); i++){
+            res = res*10 + s[i] - '0';
+        }
+        if( res > 255)                    return out;  // more than 255
+        if( s.size() > 1 && s[0] == '0') return out;  // Can't have leading zeros
+        out.push_back(s);
+        return out;
+    }
+    // No we need to find more.
+    int res = 0;
+    for(int i = 0; i < s.size(); i++) {
+        if((res*10 + s[i] -'0') > 255){
+            break;
+        }
+        if(s[0] == '0' && i > 0 ) { // if something something start with 0 we donthave anthing
+            break;
+        } else {
+            res = res*10 + s[i] - '0';
+            string right = s.substr(i + 1,  s.size() - (i + 1));
+            vector < string > fout = FindAllUtils(right,  k - 1);
+            for(string fs : fout) {
+                string left = s.substr(0,  i + 1);
+                left.push_back('.');
+                out.push_back(left.append(fs));
+            }
+        }
+    }
+    return out;
+}

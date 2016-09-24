@@ -1,1 +1,523 @@
 
+###############################################################################
+Problem on Mathematics
+###############################################################################
+
+IceBrakers
+------------------------
+1. Calculate GCD of two numbers
+2. Verify if a number is a power of two integers or not!
+3. All factors of a numbers
+4. Trailing Zeros in Factorial
+5. Rearrange Array
+
+Extracting Digits
+-------------------------
+1. Palindrome Integer
+2. Reverse integer
+
+
+Base converstions
+-----------------------
+1. Decimal to binary and vice versa
+2. Excel Column Number
+3. Excel Column Title
+
+Geomatrical algorithms
+--------------------------
+1. A point exit in counter or anticli=cok wize
+1. Check if two line inetresect
+2. Check if a point inside a polygon
+3. Convex hall problems
+4. Given n -line segmnet find if any two inetrsect
+5. Closest pair of points in a plane
+6. Determine of two rectangle overlap or not!
+
+
+Based on random numbers and Probablity
+--------------------------------------
+1. 3 Ant trangle problems
+2. Birthday paradox
+3. [Reservoir sampaling] Return random node from a Linkedlist or  select random from a stream or Select a node from a binary treee random.
+4. func(x) return 0/1 with prob 0.6/0.5, genegate an unbiased random?
+5. Build Rand(7) from Rand(5) / Rand3 using Rand2()/ Rand12 using rand 6()
+5. Generate 3 number x,y,z such that P(x)+P(y) +P(z) =1 from rand()
+6. Suffle a given array
+7. Given an array with intere and frq, return number as they made by that frequencey
+8. Puzzle The Counterfeit Coin
+9. Bayes theorrem and problem on this.
+10. Design data structure which support insert/delete/serach and get random in O(1)
+11. Get a random number from a range excluding some values
+
+Number theorys
+----------------------------
+
+
+Problem on primes
+---------------------------
+1. count prime number from 1 to N
+2. Given a number N, verify if N is prime or not.(primality test)
+3. Prime Sum: Given an even number, return two prime numbers whose sum will be equal to given number.
+
+
+########################################################
+    Array
+########################################################
+
+IceBreker
+--------------------
+1. Find dupliates in an array
+2. Repeat and Missing Number Arra
+3. First missing +ve number
+4. Add One To Number
+
+Single scan and having a output pointers
+-----------------------------------------
+1. Remove Element from Array: remove all the instances of that value in the array
+1. Remove Duplicates from Sorted Array I : left excatly once
+2. Remove Duplicates from Sorted Array II : such that each element can appear atmost twice
+
+
+voating algorithms
+----------------
+1. Find majority elemnts whcih occues more than N/2 Times./
+2. N/3 Repeat Number(any integer occurs more than n/3 times )
+
+Rearragheing digits
+---------------------
+1. Arrange them such that they form the largest number.
+2. Next lexicographic higher
+3. Prev lexicographic samll
+4. Next higher palindrome
+2. sort the array into a wave like array
+
+Cumilitive approach max-so_far
+---------------------------
+1. Max Non Negative SubArray
+2. Max Sum Contiguous Subarray
+1. Hotel Bookings Possible
+2. Max Continuous Series of 1s in a bolleans array
+3. Maximum contigious of equla number or 1 and zero.
+
+Two Pointer porblems
+-----------------------------
+1. Find two integer X , Y such that X+Y = M
+1. Find two integer X , Y such that X - Y = M
+2. Given a array find threee integers such that X+Y+Z = M
+2. Given a array find All threee integers such that X+Y+Z = 0
+3. Given a array find threee integers such that X+Y+Z+W = M
+2. Given a array find threee integers such that X+Y+Z -> M
+4. given twoo sorted array find X+Y = M
+3. Given three array find X+y+z = M
+
+
+simple binary search
+-----------------------------
+1. Find an elment A[i] = i
+2. Find fast/last occurance of duplicates in a sorted array
+2. Find a Pivot point of a rotatated sorted array
+3. Search in a roaoted sorted array
+4. Find the pivot elemnet in a stricyly increasing and the decresing array
+5. Find a elment in stricly inc and dec array
+
+Trickey Binary Serach
+--------------------------
+1. Find elemnet apper once in a sorted array - in which all elements appear twice
+2. Minimum time to finish all jobs
+
+Binary search Simulataion
+-------------------------
+1. Find sqrt/cuberoot of an integers
+2.Implement pow(x, n) % d
+ 
+
+Online Binaty serach
+------------------------
+1. Find firxt X where f(x) is positive for first time where f(x) is monotonic functions
+2. We have straeam of 0 and 1, Find first One.
+
+
+
+Binary seach for matrix
+-----------------------
+1. Matrix Serah I : searches for a value in an m x n matrix The first integer of each row is greater than or equal to the last integer of the previous row.
+2. Matrix Serach II : serach in amatrix shorted in rows and collom.
+2. find k-th smallest elment in a sorted matrix 
+
+Merge sort problems
+-----------------------------
+1. Find Union or intersection of two sorted array
+2. Merege two sorted array inplace ( which extra space avibale)
+3. Merege two sorted array inplace where no extra space is dr.(Insertion.)
+ 
+
+
+Partitions problem on array (Quick Sort)/Selction problem
+---------------------------------------
+1. Medium of an array
+1. Medium of two sorted array
+2. Find k-th smallest element in an array
+2. Find K-th smallest elemnet in two sorted array
+3. Sort 0/1/2 array
+
+matrix print
+--------------
+1. Print matrix sperically
+2. Print matrix by rotate 90deg
+3. print matrix giagonaly
+
+Matrix operations
+---------------------
+1. set a raw zero if one lemnet in that matrix is zero.
+
+hard problems
+---------------------------
+1. Stock span problem: Given an array A of integers, find the maximum of j - i subjected to the constraint of A[i] <= A[j]
+2. Flip (https://www.interviewbit.com/problems/flip/)
+3. allocate books problem
+
+
+
+########################################################
+    Strings
+########################################################
+Inplace single scan two pointer (output might be in same placeholder)
+--------------------------------
+1. Count number of words
+2. Remove extra spaces from a string
+3. Replace space by %20
+4. length of last word in a straing
+5. Pretty Joson 
+
+Extraing numbers from strings 
+-----------------------------
+1. write a aoti functions handling -ve and floating numbers
+2. compare versions of numbers
+3. Verify if the string is a valid number
+4. Check if a string indiates a valid ip address
+5. Convert Roman to interger / vise versa
+5. Integer to English Words
+
+Strings Math
+------------------------------
+1. Add two binary strings
+2. Multiply two strings
+
+Revesring strings
+-----------------------------
+1. Check palindrome while not considering whitespace and char
+1. Reveresing strings
+3. reverse Vowels
+2. reversing order in the string : "the sky is blue",=> "blue is sky the"
+3. reversing word in teh string in opposite directing.
+
+
+permutaion Combinations
+--------------------------
+1. Given numRows, generate the first numRows of Pascal’s triangle.
+2. Given an index k, return the kth row of the Pascal’s triangle.
+
+Window Scan technique
+----------------------
+1. Minimum window substaring S = "ADOBECODEBANC",T = "ABC" => "BANC"
+2. Longest Substring Without Repeating Characters
+3. Longest Substring With at most 2/K Repeating Characters
+
+String Encode Decode problems
+-----------------------------
+1. Encode strings like wwwwaaadexxxxxx => w4a3d1e1x6
+2. Decode strings like w4a3d1e1x6 => wwwwaaadexxxxxx
+3. Decode string like : s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
+
+
+Working on Recursion
+---------------------
+1. Find letter combination of a phone numbers
+2. Scramble String problem
+3. Number of way you can decode 12 ->[AB, L]
+4. Restore IP address : "25525511135" => ["255.255.11.135", "255.255.111.35"] [DONE HARD]
+5. Interleaving String : s1 = "aabcc",s2 = "dbbca", s3 = "aadbbcbcac", => True
+6. Word Ladder: Given s1 and s2 , find min distance to convert s1 to s2
+7. Deserialization of  Mini Parser: "[123,[456,[789]]]",
+8. Regular Expression Matching: isMatch("aab", "c*a*b") → true
+
+Hard problems
+------------------
+1. Longest Common Perfix for given set of strings
+2. Generate N-th count and say sequnece (1,11,21,1211,,)
+3. Implemnet strstr
+4. Justify Test to minimize lines
+5. Convert a string to ZigZag String : convert("PAYPALISHIRING", 3) => "PAHNAPLSIIGYIR"
+6. Longest Palindromic Substring (DP)
+7. Sortedts palindrome (DP)
+
+
+
+
+###############################################################################
+Problem on Linkedlist
+###############################################################################
+IceBrakers
+------------------
+1. Sorted insert into Linkedlist
+2. Delete a node from a list
+3. Find nth node from the end
+4. print linkedlist in reverse order
+
+Simple Pointer scans
+-------------------------
+1. Remove Duplicates from a shorted list levaing exacyly once
+2. Remove all Duplicates from a shorted list just having only unique.
+2. Find intersection of list
+3. Rotate a List by K times
+4. Split circulat List into two parts
+5. Remove N-th From List Ends
+5. Delete Alternating Nodes 
+
+Two pointer: Merge Split and jOin
+--------------------------------
+2. Merege two sorted List.
+3. Imaplemnet merge sort.
+3. Partitin list into two part one having greaterthan and other is less than x
+4. Odd/Even. Group all odd nodes then even nodes
+5. Union intersection of two List.
+
+
+Trcky Recrisive approch in linkedlist
+--------------------------------------
+1. Reverse a linkedlist
+2. Palindrome List
+3. Alternative merge of two List
+4. Check Identical list using recursion.
+5. Delete Alternating Nodes ( Iter + recursive)
+
+Show/Fast Pointers
+----------------------
+1. Detect cycle in list, return the node where cycle begin.
+2. Find middle of a list.( 3rd middel)
+3. Find a List is even or Odd/Even
+4. Delete Middle of List
+
+List Maths
+----------------------------
+1. Add one to a list
+2. Add two numbers as list
+3. Substract two list 
+
+
+Reverse
+-------------------------
+1. reverse a linkedlist
+2. Reverse pairs of Linkedlist
+3. Reverse K-th Block of linkedlist
+4. reverse Linkedlist from position m..n
+
+Hard problems
+-------------
+1. Reorder list by L0->Ln->L1->n-1...
+2. clone List with a random pointers
+3. Merege K sorted list
+4. Flatten a multi level List
+5. Point arbit pointer to point to greast value in right
+6. Rearrage list in Zigzag fashine a <b >c<d>e..
+
+
+########################################################
+ Problems on Tree
+#########################################################
+
+IceBrakers
+----------------
+1. Delete Tree ( Non recursive)
+1. Find the height of the tree ( count nodes etc)
+2. Find Max/Min depth of a tree
+3. Build a double tree
+
+Finding properties ( Buttom Up using recursion)
+---------------------------
+3. Find Diameter of a tree
+2. Find a tree is height balnce or not!
+2. Find a tree is symetric /mirrod to itself/completye/sumtree/full binaray
+3. Find two tree are identical or not!( Iteration + Recursion Both)
+5. Contsrtact the mirror(invert) of a tree.
+5. convert a tree to a sum tree.
+
+Tree constraction
+--------------------
+1. Sorted array to balance BST
+2. contract tree from Preorder/Postorder and Inorder
+3. Build tree from Sorted Linked-list
+4. Convert Binary tree to double Linkelist.
+
+Level wise Traversal and priting
+-----------------------------
+1. Print traversal level wise
+2. Print rever level order
+1. Zigzag level wise travalsal(Top Down)
+2. Buttom up travarasl
+3. left/Right view of the tree
+4. Top/Buttom view of a tree
+5. Verical tree sum 
+
+Tree and Stack Traversal
+---------------------------
+1. Inorder using stcak
+2. Peroder using stack
+3. Postoder using stack
+4. Print all ansistor of a binary tree
+
+Root to Lelf problems
+-----------------------
+1. print all path from root-to left line by line
+2. find there is a path of sum S
+3. Find there is nay path of sum S in any Directing 
+4. Find sum of digit of all modes 9 indigate a number)
+
+Tree Traversal and modification on the go (Static memebr problem)
+--------------------------------------------
+1. Kth smallest elment
+2. Popuation right pointer to Next right node
+3. Populationg Arbitary pointer to max nodes
+4. Building BST iterator
+5. Check if all leaf are on same level or not
+6. Leaf order traversal: Collect and remove all leaves, repeat until the tree is empty.
+
+Traversing UP
+--------------------------------------
+1. LCA of a Binary tree
+2. Print all K distance node of a tree
+3. Print all k distnace nodes from leaf
+
+problems on BST
+-----------------------
+1. Verify if a tree is BST or not!
+1. Inorder Success
+2. Inorder Predicessior
+3. LCA of a BST
+2. Recover a BST if they two node goit swaped.
+
+
+BST intervals
+---------------
+1. Count BST nodes that lie in a given range
+3. find all conflicting intervals/appointments
+
+BST reverse inorder
+------------------
+1. Add all greater values to every node in a given BST
+2. Transform a BST to greater sum tree
+3. K’th smallest element in BST in O(1) space / Moris travalsal./
+4. Replace every element with the least greater element on its right
+
+BST Trickey problems(HARD)
+-------------------------------
+1. Find two node in BST such that X+Y = Matching
+2. Find three node in BST such that X+Y+Z = Matching
+3. Remove BST keys outside the given range
+4. In-place Convert BST into a Min-Heap
+
+Problem on Heap Tree/Pririty Queue
+----------------------------------
+1. Merege K sorted List
+2. Imaplemnet Least Recently Used Cache
+3. Keep track of Frequenly uses data
+4. Findout runtime medium of a numbers
+5. Find k-lasrest word in a files
+
+
+ 
+
+Hard Problems
+------------------------------
+
+3. Sortest Unique prefix of a list of words
+4. Serialize and decreialize a tree
+6. Binary Tree Maximum Path Su.The path does not need to go through the root.
+5. Finding larest BST in a binrey tree.
+6. Find height of person standing on a queue.
+7. find two nodes in the binary tree x + y = M
+8. Populating Next Right Pointer in Each Nodes( Conencting each level)
+9. Generate all Unique Binary Search Trees  and Return. 
+10. Closest Binary Search Tree: Given a non-empty binary search tree and a target value, find k values in the BST that are closest to the target.
+
+
+#############################################################
+    Stack and Queue
+#############################################################
+IceBreakers
+--------------------------
+1. Simplify unix path.
+
+Problems on parenthesis
+------------------------
+1. Detect Duplicate parenthesis 
+2. Redundant Braces
+3. maximum depth of nested parenthesis in a string
+
+
+Stack Mathamatics
+-----------------------
+1. Evaluate Expression
+2. Rain Water Trapped
+3. Basic Calculator II: "3+2*2" = 7
+
+Custom Implementation
+----------------------
+1. Two Stack in an Array 
+2. K Stack in an array
+2. Implement a stack using single/twp queue
+2. Implement a Quee using two Stack
+3. Reverse an stack inplace
+4. sort a stack
+
+Custom Operation
+-----------------------
+2. Design a stack that supports getMin() in O(1) time 
+2. Design a stack that supports getMin() in O(1) time and O(1) extra space
+3. Get Middle in O(1)
+4. Get random in O(1)
+
+Sliding windows with Queue
+--------------------------------
+1. Return the of count of distinct numbers in all windows of size K.
+2. Sliding Window Maximum: Return the max numbers in all windows of size K. 
+3. Moving Average from Data Stream :Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window
+
+Sliding windows with Queue
+--------------------------------
+1. Skyleine prioblem 
+
+
+Hard Problems
+-----------------
+1. Nearest Smaller Element [Done]
+3. Largest Rectangle in Histogram[DONE]
+4. Merge Overlapping Intervals
+5. The Stock Span Problem/Next greater elements [DONE]
+
+
+
+
+
+
+
+#################################################################
+Recursion and Backtracking
+#################################################################
+
+Permutation and combinations
+------------------------------
+1. Sorted Permutation Rank
+2. Sorted Permutation Rank with Repeats
+3. Find C(m+n-2, m-1).
+4. print all powers set of a numbers
+5. Bell Number: Given a set of n elements, find number of ways of partitioning it.
+
+
+
+
+
+
+
+
+

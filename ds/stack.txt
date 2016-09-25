@@ -322,3 +322,152 @@ int CountReduntBraces(string s) {
     return r_count;
 }
 
+
+// This is simple recursion function. Only trick is that you can only inject ) iff we already injected more ( .
+// This will ensure that it will keepalance. You can also notices how we are collecting the result passing out
+// as "pass by refernce"
+void generateParenthesisUtils(string cur,  int start,  int end,  int n,  vector < string > & out) {
+    // base case.
+    if(start == n && end == n) {
+        out.push_back(cur);
+        return;
+    }
+    //If we can add more first breaksts
+    if(start < n) {
+        generateParenthesisUtils(cur + "(",  start + 1,  end,  n,  out);
+    }
+    //can i add more brackets.
+    if(start > end) {
+        generateParenthesisUtils(cur + ")",  start,  end + 1,  n,  out);
+    }
+}
+
+vector < string > generateParenthesis(int n) {
+    vector < string > res;
+    generateParenthesisUtils("",  0,  0,  n,  res);
+    return res;
+}
+
+// The idea is not to use stack as we only having same brackets. Thus keep tracking only open and close coutnt
+// would be suffiecnet. Make sure:
+// (1) at point close_count always less than open count e.g ")("
+// (2) At last we must same number open and close brackets
+bool isValid_I(string s) {
+    int open_count = 0 ,  close_count = 0;
+    for(char c : s) {
+        if(c == '(') {
+            open_count++;
+        }
+        if( c == ')') {
+            close_count ++;
+            if(close_count > open_count) {
+                return 0;
+            }
+        }
+    }
+    return open_count == close_count ;
+}
+
+//The idea is use to stack. When we get a open brackets and push it and when we get a close backets, pop the top of the stack and match.
+// (1) return zero if they doent match
+// (2) At last of stack should be empty
+// (3) At any point if we get an close braclet and stcak is empty that means Not sufficent open brackets so return false.
+#include<stack>
+bool isValid_II(string s) {
+    stack < char > st;
+    for( char c : s) {
+        if(c == '(' || c == '[' || c == '{') {
+            st.push(c);
+        } else {
+            // It should not be that means we have more end bracklets first
+            if(st.empty()) {
+                return 0;
+            }
+            char top = st.top();
+            st.pop();
+            if( (top == '(' && c == ')') || (top == '{' && c == '}') || (top == '[' && c == ']') ){
+                //Ok..
+                } else {
+                return 0;
+            }
+        }
+    }
+    return st.empty();
+}
+
+// here we have a WRONG solution using scanning. It doent solve the problem. failed for "()(()" as it keep an entry in stack.
+int longestValidParentheses_WRONG(string s) {
+    int max_length = 0,  cur_length = 0,  open_bal_count = 0;
+    for( char c : s) {
+        if(c == '(') {
+            open_bal_count ++;
+        } else {
+            open_bal_count --;
+            if(open_bal_count < 0) {
+                // non valid.
+                max_length = max(max_length,  cur_length );
+                cur_length = 0;
+            } else {
+                // valid
+                cur_length = cur_length + 2;
+            }
+        }
+    }
+    //at end see what is the cur_length . e.g. "()()("
+    max_length = max(max_length,  cur_length );
+    return max_length;
+}
+
+// The idea to use stack as need to keep index of elment. The problem is when a full match occure, stack become emetry how to keep track
+// blace till now. Need to push SOME DUMMRY Node.
+// (1) Fully balace string . Nothing in left in stack this case length would be i+1
+// (2) More first bracket: Will be taken care as we update the length on each )
+// (3) More ) , will break in middle : () () ) () => This case, we need to add a terminator when we process third )
+int longestValidParentheses(string s) {
+    stack < pair < int,  int >> st;
+    int result = 0;
+    for(int i = 0; i < s.size(); i++) {
+        char c = s[i];
+        if(c == '(') {
+            st.push(make_pair(i,  0));// ZERo means actual index..
+            } else {
+            if(st.empty() || st.top().second == 1) {
+                st.push(make_pair(i,  1)); // We need to PUSH a dummay node Indiactes as a terminator.
+                } else {
+                st.pop();
+                int currentLen = 0;
+                if(st.empty()) {
+                    // Means all matchs done.. cool so length is i+1 as zero based index/
+                    currentLen = i + 1;
+                } else {
+                    currentLen = i - st.top().first; // current - terminator index.
+                    }
+                result = max(result,  currentLen);
+            }
+        }
+    }
+    return result;
+}
+// This can be easily done using stack, here when we get '), we keep poppoing ultil we found ') and see
+// in this time if we get any Operator. If no that means it's a ddupliacte parenthesis.
+int CountReduntBraces(string s) {
+    stack < char > st;
+    int r_count = 0;
+    for( char c : s) {
+        if(c == ')') {
+            int is_exp = false;
+            while(st.top() != '(') {
+                if(st.top() == '+' || st.top() == '/' || st.top() == '*' || st.top() == '-' ) {is_exp = true;}
+                st.pop();
+            }
+            st.pop();
+            if(is_exp == false) {
+                r_count ++;
+            }
+        } else {
+            if(c == '+' || c == '/' || c == '*' || c == '-'  || c == '(')
+                st.push(c);
+        }
+    }
+    return r_count;
+}

@@ -113,12 +113,12 @@ Two Pointer porblems
 
 simple binary search
 -----------------------------
-1. Find an elment A[i] = i
-2. Find fast/last occurance of duplicates in a sorted array
-2. Find a Pivot point of a rotatated sorted array
-3. Search in a roaoted sorted array
-4. Find the pivot elemnet in a stricyly increasing and the decresing array
-5. Find a elment in stricly inc and dec array
+*1. Find an elment A[i] = i
+*2. Find fast/last occurance of duplicates in a sorted array
+*2. Find a Pivot point of a rotatated sorted array
+*3. Search in a roaoted sorted array
+*4. Find the pivot elemnet in a stricyly increasing and the decresing array
+*5. Find a elment in stricly inc and dec array
 
 Trickey Binary Serach
 --------------------------

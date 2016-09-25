@@ -219,10 +219,12 @@ permutaion Combinations
 
 Window Scan technique
 ----------------------
-1. Minimum window substaring S = "ADOBECODEBANC",T = "ABC" => "BANC"
-2. Longest Substring Without Repeating Characters
-3. Longest Substring With at most 2/K Repeating Characters
-
+*1. Minimum window substaring S = "ADOBECODEBANC",T = "ABC" => "BANC"
+*2. Longest Substring Without Repeating Characters
+*3. Longest Substring With at most 2/K Repeating Characters
+*4. Longest Substring With at most K Repeating Characters
+*5. Longest Substring With Exctly K Repeating Characters
+6. Substring with Concatenation of All Words 
 String Encode Decode problems
 -----------------------------
 1. Encode strings like wwwwaaadexxxxxx => w4a3d1e1x6

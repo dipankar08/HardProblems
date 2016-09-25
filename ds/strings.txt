@@ -32,7 +32,9 @@ String Encode Decode problems
 
 
 
-
+##########################################################################################
+    WINDOWS
+#############################################################################################
 
 //The idea is to have a frequnecy map for string t and scan string s from lefte to right
 // we have two pointer left and right, we are moving right unless all char of t geot covered.
@@ -96,7 +98,186 @@ void reverse(char * a,  int l,  int r) {
         r--;
     }
 }
+// The tricky part is how we are expanding and srking the wondows. We used a map to keep track we have extactly two distinct char.
+// 1) We use for loop while expanding in right, by adding the char inside the map. 
+// 2) If it break the rule, We keep strinking from left unless the rule is valid using a while loop.
+// RUN: cout << LongestWindowsContainsTwoDistinct("abcbbbbcccbdddadacb")<<endl; => bcbbbbcccb
+string LongestWindowsContainsAtMostTwoDistinct( string s) {
+    map < char,  int > m;
+    int left = 0, right = 0;
+    int max_length = 0;
+    string res = "";
+    //Uisng for loop we are expanding this windows, thus right is basically expanding....
+    for(right = 0; right < s.size(); right++) {
+        char c = s[right];
+        //Let's process the chrecter
+        if(m.find(c) == m.end()) {
+            m[c] = 1;
+        } else {
+            m[c] = m[c] + 1;
+        }
+        // After expaning the windows It's go invalid so We might need to srink.
+        if(m.size() > 2) {
+            if(right - left > max_length) {
+                max_length = right - left;
+                res = s.substr(left,  max_length);
+            }
+            //srink the windows until we validate the rule
+            while(m.size() > 2) {
+                char p = s[left];
+                int count = m[p];
+                if(count > 1) {
+                    m[p] = m[p] - 1;
+                } else {
+                    m.erase(p);
+                }
+                left++;
+            }
+        }
+    }
+    //at end
+    if(right - left > max_length) {
+        max_length = right - left;
+        res = s.substr(left,  max_length);
+    }
+    return res;
+}
+// here we are trying to findout exactly two char. Basic Stategry is remain same.. Here is the piints.
+// (1) We undate the res onlyif m.size() > 2 inside the for loop.
+// (2) At end We must check if m.size() is two or not!)
+// RUN: cout << LongestWindowsContainsEtxactlyTwoDistinct("aaaaaaaaaaaaaaaa")<<endl => ""
+string LongestWindowsContainsEtxactlyTwoDistinct( string s) {
+    map < char,  int > m;
+    int left = 0, right = 0;
+    int max_length = 0;
+    string res = "";
+    //Uisng for loop we are expanding this windows, thus right is basically expanding....
+    for(right = 0; right < s.size(); right++) {
+        char c = s[right];
+        //Let's process the chrecter
+        if(m.find(c) == m.end()) {
+            m[c] = 1;
+        } else {
+            m[c] = m[c] + 1;
+        }
+        // After expaning the windows It's go invalid so We might need to srink.
+        if(m.size() > 2) {
+            if(right - left > max_length) {
+                max_length = right - left;
+                res = s.substr(left,  max_length);
+            }
+            //srink the windows until we validate the rule
+            while(m.size() > 2) {
+                char p = s[left];
+                int count = m[p];
+                if(count > 1) {
+                    m[p] = m[p] - 1;
+                } else {
+                    m.erase(p);
+                }
+                left++;
+            }
+        }
+    }
+    //at end Must check if m.size() is 2 
+    if(m.size() == 2){
+        if(right - left > max_length) {
+            max_length = right - left;
+            res = s.substr(left,  max_length);
+        }
+    }
+    return res;
+}
 
+
+// The same as before, here we just need to ensure the valid Rules is just having k Distict char,
+// Run: cout << LongestWindowsContainsKDistinct("abcadcacacaca",3)<<endl => cadcacacaca
+string LongestWindowsContainsAtMostKDistinct( string s, int k) {
+    map < char,  int > m;
+    int left = 0, right = 0;
+    int max_length = 0;
+    string res = "";
+    //Uisng for loop we are expanding this windows, thus right is basically expanding....
+    for(right = 0; right < s.size(); right++) {
+        char c = s[right];
+        //Let's process the chrecter
+        if(m.find(c) == m.end()) {
+            m[c] = 1;
+        } else {
+            m[c] = m[c] + 1;
+        }
+        // After expaning the windows It's go invalid so We might need to srink.
+        if(m.size() > k) {
+            if(right - left > max_length) {
+                max_length = right - left;
+                res = s.substr(left,  max_length);
+            }
+            //srink the windows until we validate the rule
+            while(m.size() > k) {
+                char p = s[left];
+                int count = m[p];
+                if(count > 1) {
+                    m[p] = m[p] - 1;
+                } else {
+                    m.erase(p);
+                }
+                left++;
+            }
+        }
+    }
+    //at end
+    if(right - left > max_length) {
+        max_length = right - left;
+        res = s.substr(left,  max_length);
+    }
+    return res;
+}
+// This is similar problem as befre. We have two pointer left and right wich indicates the bounds of current windows.
+// Using for loop we are expanding the window to right. if we come acess any duplicate char, we need to move the left side of windows
+// To find the next destination, we keep track in a map : char -> index. 
+// while moving thease we need to remove all other ocuurnace of any char from left to the new left.
+string LongestWindowsWithoutAnyRepetativeChar( string s) {
+    // Will store the char to index mapping
+    map < char,  int > m;
+    int left = 0, right = 0;
+    int max_length = 0;
+    string res = "";
+    //Uisng for loop we are expanding this windows, thus right is basically expanding....
+    for(right = 0; right < s.size(); right++) {
+        char c = s[right];
+        //Let's process the chrecter
+        if(m.find(c) == m.end()) {
+            m[c] = right;
+        } else {
+            // Encounted duplicate char. Save the result till now.
+            if(right - left >= max_length) {
+                max_length = right - left;
+                res = s.substr(left,  max_length);
+            }
+            //move left to that point and update the occurenace
+            int new_left = m[c] +1;
+            
+            // Need to clean up the map data from left to new_left
+            for( int j =left; j<new_left;j++){
+                if(m.find(s[j]) !=m.end()){
+                    m.erase(s[j]);
+                }
+            }
+            m[c] = right;
+            left = new_left;
+        }
+    }
+    //at end
+    if(right - left >= max_length) {
+        max_length = right - left;
+        res = s.substr(left,  max_length);
+    }
+    return res;
+}
+
+####################################################################################
+ Encode Decode 
+#####################################################################################
 //Exampel 1: wwwwaaadexxxxxx => w4a3d1e1x6
 char * encodestring( char * a) {
     int in_idx = 0;

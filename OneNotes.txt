@@ -450,9 +450,12 @@ IceBreakers
 
 Problems on parenthesis
 ------------------------
-1. Detect Duplicate parenthesis 
-2. Redundant Braces
-3. maximum depth of nested parenthesis in a string
+1. generateParenthesis [Done]
+2. Is valid I : check valid parrenthesis only parrenethisis [Done]
+3. isValid II: Check balace parhethesis with () {}  and [] [Done]
+4. longest Valid Parentheses: ex: ()(()() ->4 [Done]
+5. maximum depth of nested parenthesis in a string
+6. Count Redundant Braces [Done] 
 
 
 Stack Mathamatics

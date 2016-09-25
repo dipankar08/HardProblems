@@ -1,0 +1,199 @@
+
+//This is simple binary serach. Two things to note:
+// 1) We use less than of equla while low <= high, else it will break single elment left / odd lnegth
+// 2) How to avoid overflow while calculating mid ?
+int binarySearch(int a[],  int n,  int key) {
+    int low = 0,  high = n - 1;
+    while(low <= high) {
+        int mid = low + (high - low) / 2;
+        if(a[mid] == key) return mid;
+        if(key < a[mid]) {
+            high = mid + 1;
+        } else {
+            low = mid - 1;
+        }
+    }
+    return - 1;
+}
+
+// (1) what is the rule when mid is first occ? why mid == 0? 
+// (2) Note that we use <=. which allow fource recur left. 
+int findIndexFastOccr(int a[],  int n,  int key) {
+    int low = 0,  high = n - 1;
+    while(low <= high) {
+        int mid = low + (high - low) / 2;
+        // Rule for fitsdt off
+        if((a[mid] == key) && ( mid == 0 || a[mid - 1] < a[mid])) return mid;
+        //Note the below >= sign
+        if(key <= a[mid]) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return - 1;
+}
+
+// (1) what is the rule when mid is last occ? why mid == n-1? 
+// (2) Note that we use >=. which allow fource recur right. 
+int findIndexLastOccr(int a[],  int n,  int key) {
+    int low = 0,  high = n - 1;
+    while(low <= high) {
+        int mid = low + (high - low) / 2;
+        // Rule for last occurences
+        if((a[mid] == key) && ( mid == n - 1 || a[mid + 1] > a[mid])) return mid;
+        // this >= is import as we need to move right.
+        if(key >= a[mid]) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return - 1;
+}
+
+//{-10, -1, 0, 3, 10, 11, 30, 50, 100}
+// (1) When we found the fixt point elemnet ? a[x] = x;
+// (2) if not found , we must return -1 at end;
+// (3) This solution will not works with duplicates as breaks the assumtion. 
+int findElemnetSameAsIndex(int a[],  int n) {
+    int low = 0,  high = n - 1;
+    while(low <= high) {
+        int mid = low + (high - low) / 2;
+        // Metting conditions.
+        if(a[mid] == mid) return mid;
+        if(a[mid] > mid) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return - 1;
+}
+
+
+// Floor is the largest elemnet which is less than key.
+// (1) what if the key larger than array ?
+// (2) what if the key is less than array[0] ?
+// (3) Design the base cased to find out the floor if three elemnet exist. 
+int findFloorOfTheKey(int a[],  int n, int key){
+    int low = 0, high = n-1;
+    while( low < high){
+        // key is higher tahn array
+        if(key >= a[high]) return high;
+        // key is lower than array
+        if( key < a[low]) return -1;
+        
+        int mid = low + (high- low)/2;
+        // design base calss when we have three elemnet <mid-1, mid, mid+1>
+        if( mid> 0 && key < a[mid] && key >=a[mid -1]) return mid-1;
+        if( mid < n-1 && key < a[mid+1] && key >=a[mid]) return mid;
+        
+        //recursion, Make sure we never include mid as well both side.
+        if(key < a[mid] ){
+            high = mid-1;
+        } else {
+            low = mid+1;
+        }
+    }
+    return -1;
+}
+
+// This solution doent required to find the pivot. we find the mid and compare<low, mid> to determine
+// if first halsf is sorted or second half. We can also note that this solution doent work 
+// for array having duplicates
+int findInRotatedArry(int a[],  int n,  int key) {
+    int low = 0,  high = n - 1;
+    while(low <= high) {
+        int mid = low + (high - low) / 2;
+        if (a[mid] == key ) return mid;
+        // Check First half is sorted
+        if(a[mid] > a[low]) {
+            if(a[low] <= key && key < a[mid]) {
+                // key is in first half
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        } else {
+            // second half is sorted
+            if(a[mid] < key && key <= a[high]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+    }
+}
+
+//An array is said to be roated iff a[low] > a[high]
+int findPivotInRotatedArray(int a[],  int n){
+    int low =0, high = n-1;
+    while(low<=high){
+        //one elemnet
+        if(low == high) return low;
+        //two elment
+        if(low +1 == high){
+            if(a[low] < a[high]){
+                return low;
+            } else{
+                return high;
+            }
+        }
+        // More than three element
+        int mid = low + (high - low) / 2;
+        if(a[mid-1] < a[mid] && a[mid] > a[mid+1]) return mid+1;
+        // first half sorted
+        if(a[low] < a[mid]){
+            low = mid;
+        } else{
+            high = mid -1;
+        }
+    }
+}
+
+//An array is said to be roated iff a[low] > a[high] : Tricky and works properly.
+int findPivotInRotatedArray1(int a[],  int n){
+    int low =0, high = n-1;
+    while(a[low] > a[high]){
+        int mid = low + (high - low) / 2;
+        //Check left sorted?
+        if(a[mid] > a[high]){
+            low = mid + 1;
+        } else{
+            high = mid;
+        }
+    }
+    return low;
+}
+
+
+// Find max elmnet {1, 3, 50, 10, 9, 7, 6}; => 50
+int findPivotInZigZagdArry(int a[],  int n){
+    int low = 0, high = n-1;
+    while(low <= high){
+        // one lemnet left
+        if(low == high) return low;
+        // two elemnt left
+        if(low+1 == high){
+            if(a[low] > a[high]) {
+                return low;
+            }
+            else{
+                return high;
+            }
+        }
+        //atleaset 3 elment
+        int mid = low + (high - low) / 2;
+        // Mid is hifger than both side
+        if(a[mid-1] < a[mid] && a[mid]  > a[mid+1]){
+            return mid;
+        }
+        //recursion First half is sorted in incremt
+        if(a[mid-1] < a[mid] && a[mid]  < a[mid+1]){
+            low = mid+1;
+        } else{
+            high = mid-1;
+        }
+    }
+}

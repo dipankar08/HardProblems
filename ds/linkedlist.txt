@@ -100,3 +100,97 @@ RandomListNode * copyRandomList(RandomListNode * head) {
     //4. return new Node
     return newHead;
 }
+
+//################ Recursion ################
+// This problem can be solved by revering the list and traversing from left to right and keep tracking the max elment
+// Once all random pointer got assign , reverse the list again and return. This problem can be solved by recursive stack.
+// We use a static memebr to keep track the max value while popping back from recursion stack.
+// (1) Static member intilized only once and having one copy acrosss recustion.
+// (2) After commong back from recustion call, it should conatins the max elment from right side.
+// (3) After this we must update this static pointer with including the current data.
+void populateGreaterPointer(RandomListNode * head) {
+    //Let's have a stack memeber for reater node;
+    static RandomListNode * max = NULL;
+    if(head == NULL) return; //No node
+    if(head->next == NULL) {
+        // One node.
+        max = head;
+        return;
+    }
+    //Apply the recursion, it will eventualy updates the static pointer.
+    populateGreaterPointer(head->next);
+    //At this point the max pointer points to greatest value in right,
+    // We should assign random pinter if it is also greater than the current node.
+    if(max->val > head->val)
+    head->random = max;
+    //update max pointer
+    if(head->val > max->val) {
+        max = head;
+    }
+}
+
+// This is a tricky recursive process. We Got a linkeldist, if it has zero or one node, just return
+// Logically devide list into two part - first and rest. Do the recursive call on rest - after this call rest would be revided,
+// At this activation, rest is the adess of next node of first as the adress of a node is not getting cahnged. so first->next == rest and
+// first ->next->next = first is rever the link. we set first->next to NULL to cur the loop.
+// You can also note that we pass the head_ref as head can be modified while reversal.
+void RecursiveReverse( ListNode ** head_ref) {
+    // base case no node or one node.
+    if( * head_ref == NULL || ( * head_ref)->next == NULL) {
+        return;
+    }
+    //what is fast and rest ?
+    ListNode * first = * head_ref;
+    ListNode * rest = first->next;
+    // call the recursion on rest
+    RecursiveReverse( & rest);
+    //at this we can assume that rest of linkedlist got reversed. but still first points to the rest node address, assigning rest pointer
+    // to first and cut the link to remove cycle.
+    first->next->next = first;
+    first->next = NULL;
+    //Update the head pointer - this is little trckey - draw the diagram to understand how
+    // headpointer getting copied. alternatively you can keep hearing the head
+     * head_ref = rest;
+}
+
+//This is the most common recursive way to do repetaive linkedlist operation. As we need to mereg alternatuivly , let's merge the first two head
+// and left the rest of both list for recurson to take care the rest of merging and atlast return the head to the caller. This result will be appened
+// to the mergeed list in called and then return the total list in caller.
+// This is common way to solve number of problem like Merge two list, add numbers in the list, compare two list, pairwise swap of list etc.
+// (1) Note that recustion returns a head node to calller which is appened in the list in caller side.
+ListNode * alternativeMerge( ListNode * a,  ListNode * b) {
+    if (a == NULL) return b;
+    if( b == NULL) return a;
+    ListNode * res = alternativeMerge(a->next,  b->next);
+    a->next = b;
+    b->next = res;
+    return a;
+}
+
+// This another example when we can do it by recursion. we call the recurion function for rest of list exceptt current to add one and get the carray
+// then it do the operation on current elment and return the new carry.
+// As we are adding one, head might need to be modifed, hence we are passing head as double pointer. 
+// if the AddOneUtils retuens one , we need to create a new node and reset the head references
+int AddOneUtils(ListNode * cur) {
+    if(cur->next == NULL) {
+        //last node
+        int val = cur->val + 1;
+        cur->val = val %10;
+        return val / 10;
+    } else {
+        int carry = AddOneUtils(cur->next);
+        int val = cur->val + carry;
+        cur->val = val %10;
+        return val / 10;
+    }
+}
+
+void AddOne(ListNode ** head_ref) {
+    int carry = AddOneUtils( * head_ref);
+    //as carry is one we must
+    if(carry == 1) {
+        ListNode * node = new ListNode(1);
+        node->next = * head_ref;
+         * head_ref = node;
+    }
+}

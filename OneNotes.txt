@@ -237,7 +237,7 @@ Working on Recursion
 1. Find letter combination of a phone numbers
 2. Scramble String problem
 3. Number of way you can decode 12 ->[AB, L]
-4. Restore IP address : "25525511135" => ["255.255.11.135", "255.255.111.35"] [DONE HARD]
+*4. Restore IP address : "25525511135" => ["255.255.11.135", "255.255.111.35"]
 5. Interleaving String : s1 = "aabcc",s2 = "dbbca", s3 = "aadbbcbcac", => True
 6. Word Ladder: Given s1 and s2 , find min distance to convert s1 to s2
 7. Deserialization of  Mini Parser: "[123,[456,[789]]]",
@@ -278,7 +278,7 @@ Simple Pointer scans
 
 Two pointer: Merge Split and jOin
 --------------------------------
-2. Merege two sorted List.
+*2. Merege two sorted List.
 3. Imaplemnet merge sort.
 3. Partitin list into two part one having greaterthan and other is less than x
 4. Odd/Even. Group all odd nodes then even nodes
@@ -317,8 +317,8 @@ Reverse
 Hard problems
 -------------
 1. Reorder list by L0->Ln->L1->n-1...
-2. clone List with a random pointers
-3. Merege K sorted list
+*2. clone List with a random pointers
+*3. Merege K sorted list
 4. Flatten a multi level List
 5. Point arbit pointer to point to greast value in right
 6. Rearrage list in Zigzag fashine a <b >c<d>e..

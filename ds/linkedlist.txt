@@ -1,0 +1,102 @@
+
+//############################### End of Utisl #########################################
+// The idea is simple iterative over two list by two pointer and compare it and append to the result.
+// At begining, We have creted a dummy node as result and an extra pointer as a tail. While compairing
+// we keep pushing the less value node into tail in result list.
+// (1) What happens if two list have different length ?
+// (2) Note that we need to return head->next as head is a dummy node, Also take care if freeing this node before returing.
+ListNode * mergeTwoLists(ListNode * l1,  ListNode * l2) {
+    //let's have a dummy node
+    ListNode * head = new ListNode(0);
+    ListNode * tail = head;
+    while(l1 != NULL && l2 != NULL) {
+        if(l1->val < l2->val) {
+            tail->next = l1;
+            tail = l1;
+            l1 = l1->next;
+        } else {
+            tail->next = l2;
+            tail = l2;
+            l2 = l2->next;
+        }
+    }
+    //At this point eith l1 or l2 reach at end.
+    if(l1 != NULL) {
+        tail->next = l1;
+    } else {
+        tail->next = l2;
+    }
+    //at end return the head ,
+    return head->next;
+}
+
+// Merge K list is something that requrire a DS to findout all the head of LL, which can be done by Pririty Queue.
+// So we caeate a PQ and push all the front. We keep poping out the front of PQ and append to the result, if X is
+// getting poped out, we need to push next of x, as it become the next comperin candidate.
+// (1) Never push a null node in PQ,
+// (2) result list is define as Dummy node and take a tail pointer to append. We sould not change the head as we need to return this.
+struct LessThan {
+    bool operator()(const ListNode * lhs,  const ListNode * rhs) const {
+        return lhs->val > rhs->val;
+    }
+};
+
+ListNode * mergeKLists(vector < ListNode *> & lists) {
+    std::priority_queue < ListNode * ,  vector < ListNode * > ,  LessThan > pq;
+    //Let;'s create a dummany node for head.
+    ListNode * head = new ListNode(0);
+    ListNode * tail = head;
+    //Initilize the pq.
+    for( ListNode * firstnode : lists ) {
+        if(firstnode != NULL)
+        pq.push(firstnode);
+    }
+    while( ! pq.empty()) {
+        ListNode * temp = pq.top();
+        tail->next = temp;
+        tail = temp;
+        if(temp->next != NULL)
+        pq.push(temp->next);
+        pq.pop();
+    }
+    return head->next;
+}
+// The idea is to first duplicate the node as next , this 1->2->3 become 1->1->2->2->3->3.
+// Next, You just copy equivalnt random pointer and lastly spilt the list and return new list.
+// (1) What if the list is empty ?
+// (2) while copying the random pointer, what if random pointer is null ?
+// (3) Is your split gurentees of restoring original list ? hist: try to move pointer in once.
+RandomListNode * copyRandomList(RandomListNode * head) {
+    //Single Node - Do nothing
+    if(head == NULL ) return NULL;
+    //1. Duplicate the next node
+    RandomListNode * temp = head;
+    while(temp != NULL) {
+        RandomListNode * node = new RandomListNode(temp->label);
+        node->next = temp->next;
+        temp->next = node;
+        temp = temp->next->next;
+    }
+    //2. Copy the random pointers
+    temp = head;
+    while(temp != NULL) {
+        if(temp->random != NULL){
+            temp->next->random = temp->random->next;
+        }
+        temp = temp->next->next;
+    }
+    //printRandomList(head);
+    //3. Split the nodes.
+ 	// break list to two
+	temp = head;
+	RandomListNode *newHead = head->next;
+	while (temp != NULL) {
+		RandomListNode *temp1 = temp->next;
+		temp->next = temp1->next;
+		if (temp1->next != NULL)
+			temp1->next = temp1->next->next;
+		temp = temp->next;
+	}
+    //4. return new Node
+    return newHead;
+}

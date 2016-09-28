@@ -310,8 +310,8 @@ List Maths
 
 Reverse
 -------------------------
-1. reverse a linkedlist
-2. Reverse pairs of Linkedlist
+*1. reverse a linkedlist
+*2. Reverse pairs of Linkedlist
 3. Reverse K-th Block of linkedlist
 4. reverse Linkedlist from position m..n
 

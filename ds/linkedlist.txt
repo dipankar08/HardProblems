@@ -194,3 +194,62 @@ void AddOne(ListNode ** head_ref) {
          * head_ref = node;
     }
 }
+
+// This use the notion of <prev-cur-next> three node logics and use loop to do the reversing.
+// as reversing must changethe head so head must be passed as a refrence
+// at the end , prev point to the last node so point head to this node.
+void reverse(ListNode ** head_ref) {
+    ListNode * prev = NULL;
+    ListNode * cur = * head_ref;
+    ListNode * next;
+    while(cur != NULL) {
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+     * head_ref = prev;
+}
+
+//reverse pair wasize- this version Just swap the value of each pairs ina loop.
+void reversepair1(ListNode * h) {
+    while(h != NULL && h->next != NULL) {
+        //swap value
+        int temp = h->val;
+        h->val = h->next->val;
+        h->next->val = temp;
+        h = h->next->next;
+    }
+}
+
+// This is little trickey and You must draw a diagram with a 4 nodes to understnad,
+// It is also based on <Prev -Cur-next three pointer technique
+// (1) Must draw the diagram to understand the pointer move
+// (2) Did you reset your head?
+// (3) What happens if list has odd number of nodes?
+void reversepair2(ListNode ** head_ref) {
+    ListNode * head = * head_ref;
+    while( head == NULL | head->next == NULL) return;
+    //setting pointers
+    ListNode * prev = head;
+    ListNode * cur = head->next;
+    ListNode * next;
+    //New head
+     * head_ref = cur;
+    //for each pair (prev-cur) do
+    while( prev != NULL && cur != NULL) {
+        //keep track the next pairs
+        next = cur->next;
+        //Move 1: Reverse the links in the pair, prev is new tail
+        cur->next = prev;
+        //Move 2: Decide what prev shoild point to,
+        prev->next = (next->next != NULL) ? next->next : next; //This
+        if(next->next == NULL) {
+            //No pair exits
+            break;
+        }
+        //Move pointer for next pair.
+        cur = next->next;
+        prev = next;
+    }
+}
